@@ -14,10 +14,10 @@ export class ByCountryPageComponent {
   countryService = inject(CountryService);
   query = signal('');
   countryResource = rxResource({
-    request: () => ({ query: this.query() }),
-    loader: ({ request }) => {
-      if (!request.query) return of([]);
-      return this.countryService.searchByCountry(request.query);
+    params: () => ({ query: this.query() }),
+    stream: ({ params }) => {
+      if (!params.query) return of([]);
+      return this.countryService.searchByCountry(params.query);
     },
   });
   onSearch(value: string) {

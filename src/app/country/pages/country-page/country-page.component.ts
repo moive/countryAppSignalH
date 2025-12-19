@@ -16,8 +16,7 @@ export class CountryPageComponent {
   countryCode = inject(ActivatedRoute).snapshot.params['code'];
 
   countryResource = rxResource({
-    request: () => ({ code: this.countryCode }),
-    loader: ({ request }) =>
-      this.countryService.searchByAlphaCode(request.code),
+    params: () => ({ code: this.countryCode }),
+    stream: ({ params }) => this.countryService.searchByAlphaCode(params.code),
   });
 }

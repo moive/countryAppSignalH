@@ -17,10 +17,10 @@ export class ByCapitalPageComponent {
   query = signal('');
 
   countryResource = rxResource({
-    request: () => ({ query: this.query() }),
-    loader: ({ request }) => {
-      if (!request.query) return of([]);
-      return this.countryService.searchByCapital(request.query);
+    params: () => ({ query: this.query() }),
+    stream: ({ params }) => {
+      if (!params.query) return of([]);
+      return this.countryService.searchByCapital(params.query);
     },
   });
 
