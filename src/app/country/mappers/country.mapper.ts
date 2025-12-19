@@ -10,12 +10,14 @@ export class CountryMapper {
       flagSvg: restCountry.flags.svg,
       name: restCountry.translations['spa']?.common ?? 'No spanish name',
       population: restCountry.population,
+      region: restCountry.region,
+      subRegion: restCountry.subregion,
     };
   }
 
   static mapRestCountryArrayToCountryArray(
-    restCountry: RESTCountry[]
+    restCountries: RESTCountry[]
   ): Country[] {
-    return restCountry.map(this.mapRestCountryToCountry);
+    return restCountries.map(this.mapRestCountryToCountry);
   }
 }
