@@ -22,7 +22,11 @@
         <td>{{ country.name }}</td>
         <td>{{ country.capital }}</td>
         <td>{{ country.population }}</td>
-        <td><a class="link-primary">More information</a></td>
+        <td>
+          <a [routerLink]="['/country/by', country.cca2]" class="link-primary">
+            More information
+          </a>
+        </td>
       </tr>
       }
     </tbody>

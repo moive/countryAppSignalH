@@ -1,6 +1,11 @@
 <country-search-input
   placeholder="Search by country"
   textButton="Search"
-  (search)="onSearch($event)"
+  (search)="query.set($event)"
 />
-<!-- <country-list /> -->
+
+@if(contryResource.error()){
+<h3 class="mt-2 text-orange-400">{{ contryResource.error() }}</h3>
+}@if (contryResource.hasValue()) {
+<country-list [countries]="contryResource.value()" />
+}
