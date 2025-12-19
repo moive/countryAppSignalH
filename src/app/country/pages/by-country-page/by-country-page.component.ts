@@ -11,13 +11,13 @@ import { CountryService } from '../../services/country.service';
   templateUrl: './by-country-page.component.html',
 })
 export class ByCountryPageComponent {
-  contryService = inject(CountryService);
+  countryService = inject(CountryService);
   query = signal('');
-  contryResource = rxResource({
+  countryResource = rxResource({
     request: () => ({ query: this.query() }),
     loader: ({ request }) => {
       if (!request.query) return of([]);
-      return this.contryService.searchByCountry(request.query);
+      return this.countryService.searchByCountry(request.query);
     },
   });
   onSearch(value: string) {
