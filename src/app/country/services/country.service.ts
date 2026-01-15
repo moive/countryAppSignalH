@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { RESTCountry } from '../interfaces/rest-countries.interface';
-import { catchError, delay, map, Observable, throwError } from 'rxjs';
+import { catchError, delay, map, Observable, of, throwError } from 'rxjs';
 import type { Country } from '../interfaces/country.interface';
 import { CountryMapper } from '../mappers/country.mapper';
 
@@ -20,9 +20,10 @@ export class CountryService {
       map((res) => CountryMapper.mapRestCountryArrayToCountryArray(res)),
       catchError((error) => {
         console.log('Error fetching ', error);
-        return throwError(
-          () => new Error(`Does not get countries with that query ${query}`)
-        );
+        // return throwError(
+        //   () => new Error(`Does not get countries with that query ${query}`)
+        // );
+        return of([]);
       })
     );
   }
