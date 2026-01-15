@@ -35,9 +35,11 @@ export class CountryService {
       delay(2000),
       map((res) => CountryMapper.mapRestCountryArrayToCountryArray(res)),
       catchError((error) => {
-        return throwError(
-          () => new Error(`Does not get countries with that name ${query}`)
-        );
+        console.log('Error fetching ', error);
+        // return throwError(
+        //   () => new Error(`Does not get countries with that name ${query}`)
+        // );
+        return of([]);
       })
     );
   }
