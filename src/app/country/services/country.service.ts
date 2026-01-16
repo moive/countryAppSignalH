@@ -70,7 +70,7 @@ export class CountryService {
     if (this.queryCacheRegion.has(region)) {
       return of(this.queryCacheRegion.get(region)!);
     }
-    console.log('Recheading to the server...');
+
     return this.http.get<RESTCountry[]>(url).pipe(
       map((res) => CountryMapper.mapRestCountryArrayToCountryArray(res)),
       tap((countries) => this.queryCacheRegion.set(region, countries)),
