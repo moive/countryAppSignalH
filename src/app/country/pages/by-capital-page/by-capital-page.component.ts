@@ -6,7 +6,7 @@ import { SearchInputComponent } from '../../../shared/components/search-input/se
 import { CountryListComponent } from '../../components/country-list/country-list.component';
 import { CountryService } from '../../services/country.service';
 import type { Country } from '../../interfaces/country.interface';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-by-capital-page',
@@ -15,7 +15,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ByCapitalPageComponent {
   countryService = inject(CountryService);
-
+  router = inject(Router);
   activatedRoute = inject(ActivatedRoute);
   querParam = this.activatedRoute.snapshot.queryParamMap.get('query') ?? '';
   query = signal(this.querParam);
@@ -24,6 +24,9 @@ export class ByCapitalPageComponent {
     params: () => ({ query: this.query() }),
     stream: ({ params }) => {
       if (!params.query) return of([]);
+      this.router.navigate(['/country/capital'], {
+        queryParams: { query: params.query },
+      });
       return this.countryService.searchByCapital(params.query);
     },
   });
