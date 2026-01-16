@@ -7,6 +7,7 @@
     #txtSearch
     (keyup.enter)="search.emit(txtSearch.value)"
     (keyup)="inputValue.set(txtSearch.value)"
+    [value]="inputValue()"
   />
   <button class="btn btn-primary" (click)="search.emit(txtSearch.value)">
     {{ textButton() }}
